@@ -29,9 +29,25 @@ This project implements a medical-grade skin disease classifier that can identif
 - **Test Accuracy**: >82%
 - **Carcinoma Recall**: >90% (critical for cancer detection)
 
-## 🚀 Quick Start
+## 🚀 Quick Start Options
 
-### 1. Installation
+### Option 1: Kaggle (Recommended for Training)
+
+**Perfect for:** Training on cloud GPUs without local setup
+
+1. **Upload dataset** to Kaggle Datasets
+2. **Create notebook** using `kaggle_skin_disease_classifier.py`
+3. **Enable GPU** and run all cells
+4. **Download trained model** in ~1 hour
+
+📖 **Full Guide**: [KAGGLE_INSTRUCTIONS.md](KAGGLE_INSTRUCTIONS.md)
+⚡ **Quick Start**: [KAGGLE_QUICK_START.md](KAGGLE_QUICK_START.md)
+
+### Option 2: Local Training
+
+**Perfect for:** Custom workflows and development
+
+#### 1. Installation
 
 ```bash
 # Clone repository
@@ -42,7 +58,7 @@ cd ML-lab-assignment
 pip install -r requirements.txt
 ```
 
-### 2. Prepare Dataset
+#### 2. Prepare Dataset
 
 Organize your dataset in the following structure:
 
@@ -63,7 +79,7 @@ dataset/
 
 Expected: 2,394 images total (399 per class)
 
-### 3. Train Model
+#### 3. Train Model
 
 ```bash
 # Train with default settings (EfficientNetB3, 2-phase training)
@@ -82,7 +98,7 @@ python src/train.py \
 - **Phase 1** (10 epochs): Feature extraction with frozen base model
 - **Phase 2** (40 epochs): Fine-tuning with unfrozen last 30% layers
 
-### 4. Evaluate Model
+#### 4. Evaluate Model
 
 ```bash
 # Evaluate on test/validation set
@@ -95,7 +111,7 @@ python src/evaluate.py \
     --show-samples
 ```
 
-### 5. Make Predictions
+#### 5. Make Predictions
 
 ```bash
 # Predict single image
@@ -112,7 +128,7 @@ python src/predict.py image.jpg \
     --gradcam
 ```
 
-### 6. Deploy API
+#### 6. Deploy API
 
 ```bash
 # Start FastAPI server
