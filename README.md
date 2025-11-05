@@ -1,426 +1,274 @@
-# 🏥 AI Skin Disease Classifier - Kaggle Edition
+# 🏥 AI Skin Disease Classifier - Multi-Dataset Training
 
-A production-ready deep learning system for multi-class classification of 6 skin conditions using CNN with transfer learning (EfficientNetB3). Designed to run entirely on Kaggle with free GPU support.
+A collection of 6 independent CNN training pipelines for different skin disease datasets using transfer learning with EfficientNetB3 on Kaggle.
 
-## 🎯 Overview
+## 📁 Repository Structure
 
-This project implements a medical-grade skin disease classifier that can identify:
-- **Acne** - Inflammatory skin condition
-- **Carcinoma** - Skin cancer (critical detection)
-- **Eczema** - Chronic inflammatory condition
-- **Keratosis** - Benign skin growths
-- **Milia** - Small white bumps
-- **Rosacea** - Chronic facial redness
-
-### Key Features
-
-✅ **Kaggle-Ready** - Runs entirely on Kaggle with zero local setup
-✅ **Free GPU Training** - Uses Kaggle's free T4/P100 GPUs (~60 min training)
-✅ **Transfer Learning** with EfficientNetB3 (300×300 input)
-✅ **Two-Phase Training** (Feature Extraction → Fine-Tuning)
-✅ **Data Augmentation** (rotation, shift, zoom, brightness)
-✅ **Comprehensive Evaluation** (confusion matrix, per-class metrics)
-✅ **High Recall for Cancer** (>90% target for Carcinoma detection)
-✅ **Complete Visualizations** (training curves, confusion matrix, metrics)
-
-## 📊 Performance Targets
-
-- **Validation Accuracy**: >85%
-- **Test Accuracy**: >82%
-- **Carcinoma Recall**: >90% (critical for cancer detection)
-- **Training Time**: ~45-60 minutes on Kaggle GPU
-
-## 🚀 Quick Start (3 Steps)
-
-### Step 1: Upload Dataset (5 minutes)
-
-Organize your images in this structure:
-
-```
-skin-disease-dataset/
-├── Acne/       (399 images)
-├── Carcinoma/  (399 images)
-├── Eczema/     (399 images)
-├── Keratosis/  (399 images)
-├── Milia/      (399 images)
-└── Rosacea/    (399 images)
-```
-
-**Upload to Kaggle:**
-1. Go to https://www.kaggle.com/datasets
-2. Click **"New Dataset"**
-3. Upload your folder
-4. Name it: **skin-disease-dataset**
-5. Click **"Create"**
-
-### Step 2: Create Notebook (2 minutes)
-
-1. Go to https://www.kaggle.com/code
-2. Click **"New Notebook"**
-3. Copy-paste **entire** `kaggle_skin_disease_classifier.py` file
-4. Click **"+ Add Data"** → Add your dataset
-5. **Settings → Accelerator → GPU T4**
-6. **Settings → Internet → ON**
-
-### Step 3: Run Training (1 click)
-
-1. Click **"Run All"** button
-2. Wait ~45-60 minutes
-3. Download `phase2_best.h5` from **Output** tab
-
-**That's it!** ✨
-
-## 📁 Project Files
+This repository contains **6 separate dataset folders**, each with its own complete training pipeline:
 
 ```
 ML-lab-assignment/
 │
-├── kaggle_skin_disease_classifier.py  ⭐ Main training notebook
-├── config_kaggle.py                   Configuration file
+├── dataset1/           ✅ Contains: Training code (Skin Disease 6-class)
+│   ├── kaggle_skin_disease_classifier.py
+│   ├── config_kaggle.py
+│   └── README.md
 │
-├── KAGGLE_INSTRUCTIONS.md             📖 Complete detailed guide
-├── KAGGLE_QUICK_START.md              ⚡ 5-minute quick reference
-├── README.md                          This file
+├── dataset2/           📁 Ready for your second dataset
+│   └── README.md
 │
-├── requirements.txt                   Python dependencies (reference)
-└── .gitignore                        Git ignore rules
+├── dataset3/           📁 Ready for your third dataset
+│   └── README.md
+│
+├── dataset4/           📁 Ready for your fourth dataset
+│   └── README.md
+│
+├── dataset5/           📁 Ready for your fifth dataset
+│   └── README.md
+│
+├── dataset6/           📁 Ready for your sixth dataset
+│   └── README.md
+│
+├── KAGGLE_INSTRUCTIONS.md      Complete Kaggle guide
+├── KAGGLE_QUICK_START.md       5-minute quick start
+├── requirements.txt            Python dependencies
+└── README.md                   This file
 ```
+
+## 🎯 Purpose
+
+Train **6 different models** on **6 different datasets** independently:
+- Each dataset folder has its own complete pipeline
+- Separate configurations per dataset
+- Independent training notebooks
+- Isolated outputs and models
+
+## 📊 Current Status
+
+| Dataset | Status | Description |
+|---------|--------|-------------|
+| **dataset1** | ✅ Ready | 6-class skin disease classifier (Acne, Carcinoma, Eczema, Keratosis, Milia, Rosacea) |
+| **dataset2** | 📁 Empty | Awaiting configuration |
+| **dataset3** | 📁 Empty | Awaiting configuration |
+| **dataset4** | 📁 Empty | Awaiting configuration |
+| **dataset5** | 📁 Empty | Awaiting configuration |
+| **dataset6** | 📁 Empty | Awaiting configuration |
+
+## 🚀 Quick Start - Dataset 1
+
+### Step 1: Upload Dataset to Kaggle
+
+Organize your images:
+```
+skin-disease-dataset/
+├── Acne/
+├── Carcinoma/
+├── Eczema/
+├── Keratosis/
+├── Milia/
+└── Rosacea/
+```
+
+Upload to https://www.kaggle.com/datasets
+
+### Step 2: Create Kaggle Notebook
+
+1. Go to https://www.kaggle.com/code
+2. Create new notebook
+3. Copy entire `dataset1/kaggle_skin_disease_classifier.py`
+4. Paste into Kaggle notebook
+5. Add your dataset (+ Add Data)
+6. Enable GPU (Settings → GPU T4)
+7. Enable Internet (Settings → Internet ON)
+
+### Step 3: Run Training
+
+1. Click "Run All"
+2. Wait ~60 minutes
+3. Download `phase2_best.h5` model
 
 ## 📖 Documentation
 
-### Quick Reference
-- **5-Minute Guide**: [KAGGLE_QUICK_START.md](KAGGLE_QUICK_START.md)
-- **Detailed Guide**: [KAGGLE_INSTRUCTIONS.md](KAGGLE_INSTRUCTIONS.md)
+### General Guides
+- [KAGGLE_INSTRUCTIONS.md](KAGGLE_INSTRUCTIONS.md) - Detailed Kaggle setup guide
+- [KAGGLE_QUICK_START.md](KAGGLE_QUICK_START.md) - 5-minute quick reference
 
-### What's Inside the Notebook
+### Dataset-Specific
+- [dataset1/README.md](dataset1/README.md) - Dataset 1 specific instructions
+- Each dataset folder has its own README
 
-`kaggle_skin_disease_classifier.py` contains (~600 lines):
+## 🔧 How to Add New Datasets
+
+To configure dataset2, dataset3, etc.:
+
+1. **Copy files from dataset1**:
+   ```bash
+   cp dataset1/kaggle_skin_disease_classifier.py dataset2/
+   cp dataset1/config_kaggle.py dataset2/
+   ```
+
+2. **Update configuration** in `dataset2/config_kaggle.py`:
+   ```python
+   DATASET_NAME = 'your-dataset2-name'
+   CLASSES = ['Class1', 'Class2', ...]  # Your classes
+   ```
+
+3. **Update notebook** `dataset2/kaggle_skin_disease_classifier.py`:
+   - Update `DATASET_NAME` variable
+   - Update `CLASSES` list
+   - Adjust hyperparameters if needed
+
+4. **Follow same Kaggle workflow**:
+   - Upload dataset to Kaggle
+   - Create notebook
+   - Run training
+
+## 📦 What Each Dataset Folder Contains
+
+Each dataset folder should have:
+
+```
+datasetN/
+├── kaggle_skin_disease_classifier.py    Training notebook
+├── config_kaggle.py                     Configuration
+└── README.md                            Dataset-specific docs
+```
+
+After training on Kaggle, you'll download:
+```
+datasetN/
+├── models/
+│   ├── phase1_best.h5
+│   ├── phase2_best.h5      ⭐ Use this
+│   └── final_model.h5
+└── outputs/
+    ├── confusion_matrix.png
+    ├── training_history.png
+    └── summary.json
+```
+
+## 🎯 Training Specifications
+
+### Common Settings (All Datasets)
+
+- **Model**: EfficientNetB3 (pretrained on ImageNet)
+- **Input Size**: 300×300×3
+- **Training**: Two-phase (Feature Extraction + Fine-Tuning)
+- **Phase 1**: 10 epochs, LR=1e-3, frozen base
+- **Phase 2**: 40 epochs, LR=1e-5, unfrozen 30% layers
+- **Batch Size**: 32
+- **Augmentation**: Rotation, shift, zoom, brightness
+- **Platform**: Kaggle with free GPU (T4/P100)
+
+### Customizable per Dataset
+
+- Number of classes
+- Class names
+- Epochs count
+- Batch size
+- Learning rates
+- Augmentation parameters
+
+## 💡 Use Cases
+
+This multi-dataset structure is perfect for:
+
+- **Multiple Projects**: Train different models for different clients/projects
+- **A/B Testing**: Compare different datasets or preprocessing approaches
+- **Ensemble Learning**: Train 6 models and combine predictions
+- **Different Diseases**: Each dataset focuses on different conditions
+- **Experimentation**: Try different architectures per dataset
+- **Research**: Compare results across different data sources
+
+## 📊 Expected Performance (per dataset)
+
+| Metric | Target |
+|--------|--------|
+| Validation Accuracy | >85% |
+| Test Accuracy | >82% |
+| Training Time (GPU) | ~60 min |
+| Training Time (CPU) | ~6-8 hours |
+
+## 🔬 Example Workflow
+
+### Scenario: Training All 6 Datasets
+
+1. **Week 1**: Configure and train dataset1
+2. **Week 2**: Configure and train dataset2
+3. **Week 3**: Configure and train dataset3
+4. **Week 4**: Configure and train dataset4
+5. **Week 5**: Configure and train dataset5
+6. **Week 6**: Configure and train dataset6
+
+Or run all in parallel if you have multiple Kaggle accounts!
+
+## ⚙️ Advanced Usage
+
+### Batch Processing Multiple Datasets
 
 ```python
-# Section 1: Installation & Imports
-# Section 2: Configuration (auto-detects Kaggle)
-# Section 3: Data Exploration (visualizations)
-# Section 4: Data Pipeline (augmentation)
-# Section 5: Model Architecture (EfficientNetB3)
-# Section 6: Phase 1 Training (Feature Extraction, 10 epochs)
-# Section 7: Phase 2 Training (Fine-Tuning, 40 epochs)
-# Section 8: Evaluation (metrics, confusion matrix)
-# Section 9: Save Results (models, plots, reports)
+# After training all 6 models, ensemble predictions
+models = []
+for i in range(1, 7):
+    model = load_model(f'dataset{i}/phase2_best.h5')
+    models.append(model)
+
+# Ensemble prediction
+predictions = [model.predict(image) for model in models]
+final_prediction = np.mean(predictions, axis=0)
 ```
 
-## 🎓 Training Details
-
-### Model Architecture
+### Comparing Model Performance
 
 ```python
-EfficientNetB3 (pretrained on ImageNet)
-    ↓
-GlobalAveragePooling2D
-    ↓
-BatchNormalization
-    ↓
-Dropout(0.4)
-    ↓
-Dense(256, activation='relu')
-    ↓
-BatchNormalization
-    ↓
-Dropout(0.3)
-    ↓
-Dense(6, activation='softmax')  # 6 classes
+# Load all 6 training summaries
+summaries = []
+for i in range(1, 7):
+    with open(f'dataset{i}/outputs/summary.json') as f:
+        summaries.append(json.load(f))
+
+# Compare accuracies
+for i, summary in enumerate(summaries, 1):
+    print(f"Dataset {i}: {summary['test_accuracy']:.4f}")
 ```
 
-### Two-Phase Training Strategy
+## 📁 .gitignore
 
-**Phase 1: Feature Extraction (10 epochs)**
-- Freeze base EfficientNetB3 model
-- Train only top classification layers
-- Learning Rate: 1e-3
-- Batch Size: 32
-
-**Phase 2: Fine-Tuning (40 epochs)**
-- Unfreeze last 30% of base model layers
-- Fine-tune with lower learning rate
-- Learning Rate: 1e-5
-- Batch Size: 32
-
-### Data Augmentation
-
-- **Rotation**: ±20°
-- **Width/Height Shift**: 20%
-- **Horizontal Flip**: Yes
-- **Zoom**: 15%
-- **Brightness**: 80-120%
-- **Validation Split**: 15%
-
-## 📦 Files Generated on Kaggle
-
-After training, these files are saved in `/kaggle/working/`:
-
-### Models
-```
-models/
-├── phase1_best.h5        Best model from Phase 1
-├── phase1_final.h5       Final Phase 1 model
-├── phase2_best.h5        ⭐ USE THIS FOR DEPLOYMENT
-└── final_model.h5        Final Phase 2 model
-```
-
-### Outputs
-```
-outputs/
-├── class_distribution.png      Dataset balance visualization
-├── augmentation_examples.png   Data augmentation samples
-├── phase1_history.png          Phase 1 training curves
-├── phase2_history.png          Phase 2 training curves
-├── combined_history.png        Complete training history
-├── confusion_matrix.png        Model confusion matrix
-├── per_class_metrics.png       Per-class performance
-├── classification_report.csv   Detailed metrics (CSV)
-├── confusion_matrix.csv        Confusion matrix (CSV)
-├── training_history.pkl        Training history (pickle)
-└── training_summary.json       Summary statistics (JSON)
-```
-
-## 📥 Download Your Model
-
-### Essential Files to Download
-
-1. **phase2_best.h5** ⭐ - Your trained model (most important!)
-2. **training_summary.json** - Performance metrics
-
-### How to Download
-
-**Method 1: From Output Tab**
-1. Click **"Output"** tab at bottom of notebook
-2. Expand `/kaggle/working/models/`
-3. Right-click `phase2_best.h5` → **"Download"**
-
-**Method 2: Create Dataset from Output**
-1. Click **"Save Version"** → **"Save & Run All"**
-2. Go to **"Output"** tab when complete
-3. Click **"Create Dataset"**
-4. Download entire dataset
-
-## 🧪 Using Your Trained Model
-
-### Test Predictions (Add to Notebook)
-
-```python
-# Add this cell at the end of notebook to test your model
-import numpy as np
-from tensorflow.keras.preprocessing import image
-
-# Load model
-model = keras.models.load_model('/kaggle/working/models/phase2_best.h5')
-
-# Test on a validation image
-val_images, val_labels = next(val_generator)
-test_img = val_images[0]
-test_img = np.expand_dims(test_img, axis=0)
-
-# Predict
-predictions = model.predict(test_img)
-predicted_class = CLASSES[np.argmax(predictions)]
-confidence = np.max(predictions)
-
-print(f"Predicted: {predicted_class}")
-print(f"Confidence: {confidence:.2%}")
-
-# Show probabilities for all classes
-for i, cls in enumerate(CLASSES):
-    print(f"{cls:12s}: {predictions[0][i]:.4f}")
-```
-
-### Deploy Locally (After Download)
-
-```python
-# On your local machine
-import tensorflow as tf
-import numpy as np
-from tensorflow.keras.preprocessing import image
-
-# Load downloaded model
-model = tf.keras.models.load_model('phase2_best.h5')
-
-# Load and preprocess image
-img = image.load_img('test_image.jpg', target_size=(300, 300))
-img_array = image.img_to_array(img) / 255.0
-img_array = np.expand_dims(img_array, axis=0)
-
-# Predict
-predictions = model.predict(img_array)
-classes = ['Acne', 'Carcinoma', 'Eczema', 'Keratosis', 'Milia', 'Rosacea']
-
-print(f"Predicted: {classes[np.argmax(predictions)]}")
-print(f"Confidence: {np.max(predictions):.2%}")
-```
-
-## 📊 Expected Results
-
-### Sample Output
-
-After training completes, you should see:
-
-```
-🎯 TARGET ACHIEVEMENT SUMMARY
-======================================================================
-✓ Validation Accuracy  : 0.8876 >= 0.8500
-✓ Test Accuracy        : 0.8542 >= 0.8200
-✓ Carcinoma Recall     : 0.9250 >= 0.9000
-======================================================================
-🎉 ALL TARGETS ACHIEVED! Model is ready for deployment.
-======================================================================
-```
-
-### Performance Metrics
-
-| Metric | Target | Typical |
-|--------|--------|---------|
-| Validation Accuracy | >85% | 85-92% |
-| Test Accuracy | >82% | 82-90% |
-| Carcinoma Recall | >90% | 90-95% |
-| Training Time (GPU) | - | 45-60 min |
-| Training Time (CPU) | - | 6-8 hours |
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-#### 1. Dataset Not Found
-```python
-❌ ERROR: Dataset not found at /kaggle/input/skin-disease-dataset
-```
-**Fix:**
-- Verify dataset is attached: Click "+ Add Data"
-- Update `DATASET_NAME` variable in notebook if using different name
-
-#### 2. Out of Memory
-```
-ResourceExhaustedError: OOM when allocating tensor
-```
-**Fix:**
-```python
-# Reduce batch size
-PHASE1_BATCH_SIZE = 16  # Instead of 32
-PHASE2_BATCH_SIZE = 16  # Instead of 32
-```
-
-#### 3. Slow Training
-**Fix:**
-- Enable GPU: Settings → Accelerator → GPU T4
-- Verify: `tf.config.list_physical_devices('GPU')` should show GPU
-
-#### 4. Internet Connection Error
-**Fix:**
-- Turn ON internet: Settings → Internet → ON
-- Required for downloading pretrained weights (one-time)
-
-## 💡 Tips for Best Results
-
-### 1. Dataset Quality
-✅ Use high-quality, clear images
-✅ Ensure balanced classes (same images per class)
-✅ Remove duplicates and corrupted files
-✅ Consistent image quality across classes
-
-### 2. GPU Usage
-✅ Always enable GPU (30x faster than CPU)
-✅ Kaggle provides 30 hours/week of GPU for free
-✅ P100 or T4 GPUs work great for this project
-
-### 3. Training Optimization
-✅ Monitor validation loss (stop if diverging)
-✅ Early stopping is enabled (patience=7)
-✅ Learning rate reduction on plateau
-✅ Save checkpoints frequently
-
-### 4. Improving Accuracy
-If accuracy is low:
-- Increase Phase 2 epochs to 50-60
-- Try data cleaning (remove bad images)
-- Check dataset labels are correct
-- Experiment with augmentation parameters
-
-## 📚 Additional Resources
-
-### Documentation
-- [Kaggle Notebooks Guide](https://www.kaggle.com/docs/notebooks)
-- [Kaggle Datasets Guide](https://www.kaggle.com/docs/datasets)
-- [TensorFlow Transfer Learning](https://www.tensorflow.org/tutorials/images/transfer_learning)
-
-### Research Papers
-- [EfficientNet Paper](https://arxiv.org/abs/1905.11946)
-- [Transfer Learning for Medical Imaging](https://www.nature.com/articles/s41598-019-47765-w)
-
-## ⚠️ Medical Disclaimer
-
-**IMPORTANT**: This is an AI-powered prediction tool and should **NOT** replace professional medical diagnosis. Always consult a qualified dermatologist or healthcare provider for proper diagnosis and treatment.
-
-The model achieves high accuracy on the training dataset but may not generalize to all real-world scenarios. Use as a supplementary screening tool only.
-
-## 🎯 Use Cases
-
-Perfect for:
-- 🎓 **Students & Researchers** - Learn medical image classification
-- 🔬 **Data Scientists** - Experiment with transfer learning
-- 🏥 **Medical Projects** - Prototype screening tools
-- 📊 **Kaggle Competitions** - Baseline for skin disease challenges
-- 💡 **Learning** - Understand CNN architecture and training
-
-## ✅ Pre-Flight Checklist
-
-Before clicking "Run All":
-
-- [ ] Dataset uploaded to Kaggle Datasets
-- [ ] Dataset named `skin-disease-dataset` (or updated in code)
-- [ ] All 6 class folders present (Acne, Carcinoma, Eczema, Keratosis, Milia, Rosacea)
-- [ ] Images are valid (JPG/PNG) and not corrupted
-- [ ] GPU enabled (Settings → Accelerator → GPU T4)
-- [ ] Internet ON (Settings → Internet → ON)
-- [ ] Dataset attached to notebook (+ Add Data)
-- [ ] Notebook file copied completely
-
-**All checked?** Click **"Run All"** and wait ~60 minutes! 🚀
+The following are ignored by git:
+- `*/models/*.h5` (model files are large)
+- `*/outputs/` (generated outputs)
+- `*/logs/` (training logs)
+- Dataset folders (add your data locally, not in git)
 
 ## 🤝 Contributing
 
-This is an educational project. Feel free to:
-- Fork and experiment with different architectures
-- Try different datasets following the same structure
-- Optimize hyperparameters
-- Share your results
+Feel free to:
+- Add more datasets (dataset7, dataset8, ...)
+- Experiment with different architectures
+- Share your configurations
+- Report issues or improvements
 
-## 📄 License
+## ⚠️ Medical Disclaimer
 
-This project is for educational and research purposes. Ensure compliance with medical AI regulations in your jurisdiction before clinical deployment.
-
-## 🙏 Acknowledgments
-
-- EfficientNet: [Tan & Le, 2019](https://arxiv.org/abs/1905.11946)
-- Transfer Learning: TensorFlow/Keras documentation
-- Kaggle: For providing free GPU infrastructure
+This is an AI tool for educational purposes. Always consult qualified medical professionals for diagnosis and treatment.
 
 ## 📧 Support
 
 - **Issues**: Open a GitHub issue
-- **Questions**: Check [KAGGLE_INSTRUCTIONS.md](KAGGLE_INSTRUCTIONS.md)
-- **Quick Help**: See [KAGGLE_QUICK_START.md](KAGGLE_QUICK_START.md)
+- **Questions**: Check dataset-specific README files
+- **Kaggle Help**: See KAGGLE_INSTRUCTIONS.md
 
 ---
 
-## 🚀 Ready to Train?
+## ✅ Next Steps
 
-1. **Upload** your dataset to Kaggle
-2. **Create** notebook with `kaggle_skin_disease_classifier.py`
-3. **Enable** GPU and Internet
-4. **Run** all cells
-5. **Download** your trained model
-
-**Total time: ~1 hour** ⏱️
+1. **Current**: Dataset1 is ready to use
+2. **Your Task**: Configure datasets 2-6 based on your needs
+3. **Process**: Copy dataset1 files, update configurations, train
+4. **Result**: 6 independent trained models
 
 ---
 
-**Built with ❤️ for medical AI education**
+**Built for scalable multi-dataset medical AI training on Kaggle**
 
-*Powered by Kaggle's free GPU infrastructure | EfficientNetB3 Transfer Learning | Production-ready in 60 minutes*
+*Powered by EfficientNetB3 | Free GPU Training | 6 Independent Pipelines*
