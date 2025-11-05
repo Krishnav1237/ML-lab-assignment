@@ -1,6 +1,6 @@
 # 🏥 AI Skin Disease Classifier - Multi-Dataset Training
 
-A collection of 6 independent CNN training pipelines for different skin disease datasets using transfer learning with EfficientNetB3 on Kaggle.
+A collection of 6 independent CNN training pipelines for different skin disease datasets using transfer learning with EfficientNet (B3/B4/B5) on Kaggle.
 
 ## 📁 Repository Structure
 
@@ -9,15 +9,19 @@ This repository contains **6 separate dataset folders**, each with its own compl
 ```
 ML-lab-assignment/
 │
-├── dataset1/           ✅ Contains: Training code (Skin Disease 6-class)
+├── dataset1/           ✅ Basic Pipeline (6-class skin diseases)
 │   ├── kaggle_skin_disease_classifier.py
 │   ├── config_kaggle.py
 │   └── README.md
 │
-├── dataset2/           📁 Ready for your second dataset
+├── dataset2/           ✅ Robust Pipeline (Psoriasis/Lichen Planus)
+│   ├── kaggle_psoriasis_robust_classifier.py
+│   ├── config_psoriasis_robust.py
 │   └── README.md
 │
-├── dataset3/           📁 Ready for your third dataset
+├── dataset3/           ✅ Advanced Pipeline (PUMCH-ISD 8-class multimodal)
+│   ├── kaggle_pumch_advanced_classifier.py
+│   ├── config_pumch_advanced.py
 │   └── README.md
 │
 ├── dataset4/           📁 Ready for your fourth dataset
@@ -45,14 +49,14 @@ Train **6 different models** on **6 different datasets** independently:
 
 ## 📊 Current Status
 
-| Dataset | Status | Description |
-|---------|--------|-------------|
-| **dataset1** | ✅ Ready | 6-class skin disease classifier (Acne, Carcinoma, Eczema, Keratosis, Milia, Rosacea) |
-| **dataset2** | 📁 Empty | Awaiting configuration |
-| **dataset3** | 📁 Empty | Awaiting configuration |
-| **dataset4** | 📁 Empty | Awaiting configuration |
-| **dataset5** | 📁 Empty | Awaiting configuration |
-| **dataset6** | 📁 Empty | Awaiting configuration |
+| Dataset | Status | Description | Techniques | Target Acc |
+|---------|--------|-------------|------------|------------|
+| **dataset1** | ✅ Complete | 6-class (Acne, Carcinoma, Eczema, Keratosis, Milia, Rosacea) | Basic | 85-88% |
+| **dataset2** | ✅ Complete | 2-class Psoriasis/Lichen Planus (~1,500 images) | Robust (11) | 90-93% |
+| **dataset3** | ✅ Complete | 8-class PUMCH-ISD multimodal (~9,748 images) | Advanced (15) | 88-90% |
+| **dataset4** | 📁 Empty | Awaiting configuration | - | - |
+| **dataset5** | 📁 Empty | Awaiting configuration | - | - |
+| **dataset6** | 📁 Empty | Awaiting configuration | - | - |
 
 ## 🚀 Quick Start - Dataset 1
 
@@ -147,27 +151,71 @@ datasetN/
     └── summary.json
 ```
 
+## 🎓 Pipeline Comparison
+
+Each dataset uses progressively more advanced techniques:
+
+| Feature | Dataset 1 (Basic) | Dataset 2 (Robust) | Dataset 3 (Advanced) |
+|---------|-------------------|-------------------|---------------------|
+| **Model** | EfficientNetB3 | EfficientNetB4 | EfficientNetB5 |
+| **Resolution** | 300×300 | 380×380 | 456×456 |
+| **Classes** | 6 | 2 | 8 |
+| **Images** | ~2,394 | ~1,500 | ~9,748 |
+| **Total Epochs** | 50 | 75 | 100 |
+| **Augmentation** | Standard | Advanced | Most Advanced |
+| **CLAHE** | ✗ | ✓ | ✓ |
+| **Mixup** | ✗ | ✓ | ✓ |
+| **CutMix** | ✗ | ✗ | ✓ |
+| **TTA** | ✗ | ✓ (5 steps) | ✓ (7 steps) |
+| **Focal Loss** | ✗ | Optional | ✓ |
+| **Label Smoothing** | ✗ | ✓ | ✓ |
+| **Cosine Annealing** | ✗ | ✓ | ✓ (with restarts) |
+| **Snapshot Ensemble** | ✗ | ✓ | ✓ |
+| **Top-K Accuracy** | ✗ | ✗ | ✓ (Top-2) |
+| **Multimodal** | ✗ | ✗ | ✓ |
+| **Training Time** | ~60 min | ~90-120 min | ~180-240 min |
+| **Expected Acc** | 85-88% | 90-93% | 88-90% |
+| **Difficulty** | Easy | Moderate | Hard |
+| **Use Case** | General 6-class | Binary Medical | Multi-Class Medical |
+
+**Choose based on your needs:**
+- **Dataset 1**: Quick prototyping, general skin diseases
+- **Dataset 2**: High-accuracy binary classification, medical-grade
+- **Dataset 3**: Complex multi-class, research-grade, multimodal
+
 ## 🎯 Training Specifications
 
-### Common Settings (All Datasets)
+### Dataset 1: Basic Pipeline
 
-- **Model**: EfficientNetB3 (pretrained on ImageNet)
+- **Model**: EfficientNetB3 (12M parameters)
 - **Input Size**: 300×300×3
-- **Training**: Two-phase (Feature Extraction + Fine-Tuning)
-- **Phase 1**: 10 epochs, LR=1e-3, frozen base
-- **Phase 2**: 40 epochs, LR=1e-5, unfrozen 30% layers
-- **Batch Size**: 32
-- **Augmentation**: Rotation, shift, zoom, brightness
-- **Platform**: Kaggle with free GPU (T4/P100)
+- **Training**: Two-phase (10 + 40 epochs)
+- **Augmentation**: Standard (rotation, shift, zoom, brightness)
+- **Time**: ~60 minutes on GPU
 
-### Customizable per Dataset
+### Dataset 2: Robust Pipeline
 
-- Number of classes
-- Class names
-- Epochs count
-- Batch size
-- Learning rates
-- Augmentation parameters
+- **Model**: EfficientNetB4 (19M parameters)
+- **Input Size**: 380×380×3
+- **Training**: Two-phase (15 + 60 epochs)
+- **Advanced Techniques**: 11 (Mixup, TTA, CLAHE, etc.)
+- **Medical Metrics**: Sensitivity, Specificity, AUC-ROC
+- **Time**: ~90-120 minutes on GPU
+
+### Dataset 3: Advanced Pipeline
+
+- **Model**: EfficientNetB5 (28M parameters)
+- **Input Size**: 456×456×3
+- **Training**: Two-phase (20 + 80 epochs)
+- **Advanced Techniques**: 15 (Mixup, CutMix, Focal Loss, etc.)
+- **Medical Metrics**: Top-2 Accuracy, Per-Class Analysis
+- **Multimodal**: Clinical + Dermoscopic images
+- **Time**: ~180-240 minutes on GPU
+
+### Platform
+
+- **All Datasets**: Kaggle with free GPU (T4/P100)
+- **Internet**: Required for downloading pretrained weights
 
 ## 💡 Use Cases
 
@@ -262,13 +310,24 @@ This is an AI tool for educational purposes. Always consult qualified medical pr
 
 ## ✅ Next Steps
 
-1. **Current**: Dataset1 is ready to use
-2. **Your Task**: Configure datasets 2-6 based on your needs
-3. **Process**: Copy dataset1 files, update configurations, train
-4. **Result**: 6 independent trained models
+1. **Completed**:
+   - ✅ Dataset 1: Basic 6-class pipeline
+   - ✅ Dataset 2: Robust 2-class medical pipeline (11 advanced techniques)
+   - ✅ Dataset 3: Advanced 8-class multimodal pipeline (15 advanced techniques)
+
+2. **Remaining**:
+   - 📁 Dataset 4: Awaiting your dataset specification
+   - 📁 Dataset 5: Awaiting your dataset specification
+   - 📁 Dataset 6: Awaiting your dataset specification
+
+3. **Usage**:
+   - Review each dataset's README for specific instructions
+   - Upload your data to Kaggle Datasets
+   - Copy the appropriate notebook to Kaggle
+   - Train and download your model
 
 ---
 
 **Built for scalable multi-dataset medical AI training on Kaggle**
 
-*Powered by EfficientNetB3 | Free GPU Training | 6 Independent Pipelines*
+*Progressive Complexity: Basic → Robust → Advanced | EfficientNetB3/B4/B5 | Free GPU Training | 6 Independent Pipelines*
